@@ -1,25 +1,30 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router , Routes, Route, Link} from "react-router-dom";
+import {Home} from "./componnents/Home";
+import { Product } from './componnents/Product';
+import { ProductDetails} from './componnents/ProductDetails';
+import './index.css';
+import {ProductHome } from './componnents/ProductHome';
+import { NotDefine } from './componnents/NotDefine';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <h1>welcome to shoe app</h1>
+      <nav> 
+        <Link  to="/">Home</Link> {" "}
+        <Link to="Product">product</Link>{" "}
+        
+      </nav>
+      <Routes>
+        <Route  path= "/" element={<Home />}/> 
+        <Route path="Product" element={<Product />}>
+          <Route path="/" element={<ProductHome />}></Route>
+          <Route path=":productId" element={< ProductDetails />}></Route>
+        </Route>
+        <Route path="*" element={< NotDefine />}></Route>
+       </Routes>
+    </Router>
   );
 }
 
